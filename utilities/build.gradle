@@ -1,0 +1,5 @@
+plugins {
+    id "org.wurstworks.folio.java-library-conventions"
+    id "io.franzbecker.gradle-lombok" version "4.0.0"
+}
+

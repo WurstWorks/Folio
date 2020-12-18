@@ -1,0 +1,14 @@
+plugins {
+    id "maven-publish"
+    id "org.wurstworks.folio.java-application-conventions"
+    id "io.franzbecker.gradle-lombok" version "4.0.0"
+}
+
+dependencies {
+    implementation project(":utilities")
+}
+
+application {
+    mainClass = "org.wurstworks.folio.app.App"
+}
+

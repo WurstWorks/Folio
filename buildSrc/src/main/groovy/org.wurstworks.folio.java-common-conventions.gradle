@@ -1,0 +1,39 @@
+plugins {
+    id "checkstyle"
+    id "jacoco"
+    id "java"
+    id "maven-publish"
+    id "pmd"
+    id "signing"
+}
+
+group "org.wurstworks.folio"
+version "0.1-SNAPSHOT"
+description "WurstWorks Folio"
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation "org.slf4j:slf4j-api:1.7.30"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+    testRuntimeOnly "org.slf4j:slf4j-simple:1.7.30"
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
+
+String propertyWithDefault(String name, Object value) {
+    hasProperty(name) ? property(name) : value
+} 
+
