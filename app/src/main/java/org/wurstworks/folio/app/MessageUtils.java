@@ -4,7 +4,9 @@
 package org.wurstworks.folio.app;
 
 class MessageUtils {
+    public static final String MESSAGE = "Hello World!";
+
     public static String getMessage() {
-        return "Hello      World!";
+        return MESSAGE;
     }
 }

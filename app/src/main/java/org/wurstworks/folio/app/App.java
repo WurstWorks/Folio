@@ -10,9 +10,8 @@ import static org.wurstworks.folio.utilities.StringUtils.split;
 import static org.wurstworks.folio.app.MessageUtils.getMessage;
 
 public class App {
-    public static void main(String[] args) {
-        LinkedList tokens;
-        tokens = split(getMessage());
+    public static void main(final String[] arguments) {
+        final LinkedList tokens = split(getMessage());
         System.out.println(join(tokens));
     }
 }

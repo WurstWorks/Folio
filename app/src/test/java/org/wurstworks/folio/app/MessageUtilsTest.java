@@ -3,12 +3,13 @@
  */
 package org.wurstworks.folio.app;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class MessageUtilsTest {
-    @Test public void testGetMessage() {
-        assertEquals("Hello      World!", MessageUtils.getMessage());
+    @Test
+    public void testGetMessage() {
+        assertThat(MessageUtils.getMessage()).isEqualTo(MessageUtils.MESSAGE);
     }
 }

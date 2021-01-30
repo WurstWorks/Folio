@@ -1,5 +1,7 @@
 plugins {
     id "checkstyle"
+    id "eclipse"
+    id "idea"
     id "jacoco"
     id "java"
     id "maven-publish"
@@ -21,19 +23,67 @@ repositories {
 }
 
 dependencies {
+    compileOnly "javax.validation:validation-api:2.0.1.Final"
+
     implementation "org.slf4j:slf4j-api:1.7.30"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
-    testRuntimeOnly "org.slf4j:slf4j-simple:1.7.30"
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+        html.stylesheet resources.text.fromFile("config/checkstyle/checkstyle.xsl")
+    }
 }
 
 tasks.named("test") {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeEngines "junit-jupiter"
+
+        maxHeapSize = "2G"
+        failFast = true
+
+        reports {
+            html.enabled = true
+        }
+
+        finalizedBy jacocoTestReport
+    }
 }
 
-String propertyWithDefault(String name, Object value) {
-    hasProperty(name) ? property(name) : value
-} 
+checkstyle {
+    toolVersion "8.39"
+    configFile file("config/checkstyle/checkstyle.xml")
+}
+
+checkstyleMain {
+    source = "src/main/java"
+}
+
+checkstyleTest {
+    source = "src/test/java"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.7
+            }
+        }
+    }
+}
 

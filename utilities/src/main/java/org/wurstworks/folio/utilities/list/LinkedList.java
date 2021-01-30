@@ -17,18 +17,10 @@ public class LinkedList {
         }
     }
 
-    private static Node tail(Node head) {
-        Node it;
-
-        for (it = head; it != null && it.next != null; it = it.next) {}
-
-        return it;
-    }
-
     public boolean remove(String element) {
-        boolean result = false;
-        Node previousIt = null;
-        Node it = null;
+        boolean result     = false;
+        Node    previousIt = null;
+        Node    it         = null;
         for (it = head; !result && it != null; previousIt = it, it = it.next) {
             if (0 == element.compareTo(it.data)) {
                 result = true;
@@ -40,18 +32,11 @@ public class LinkedList {
         return result;
     }
 
-    private void unlink(Node previousIt, Node currentIt) {
-        if (currentIt == head) {
-            head = currentIt.next;
-        } else {
-            previousIt.next = currentIt.next;
-        }
-    }
-
     public int size() {
         int size = 0;
 
-        for (Node it = head; it != null; ++size, it = it.next) {}
+        for (Node it = head; it != null; ++size, it = it.next) {
+        }
 
         return size;
     }
@@ -70,12 +55,29 @@ public class LinkedList {
         return it.data;
     }
 
+    private void unlink(Node previousIt, Node currentIt) {
+        if (currentIt == head) {
+            head = currentIt.next;
+        } else {
+            previousIt.next = currentIt.next;
+        }
+    }
+
     private static class Node {
         final String data;
         Node next;
 
-        Node(String data) {
+        Node(final String data) {
             this.data = data;
         }
+    }
+
+    private static Node tail(Node head) {
+        Node it;
+
+        for (it = head; it != null && it.next != null; it = it.next) {
+        }
+
+        return it;
     }
 }

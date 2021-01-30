@@ -6,7 +6,7 @@ package org.wurstworks.folio.utilities;
 import org.wurstworks.folio.utilities.list.LinkedList;
 
 class JoinUtils {
-    public static String join(LinkedList source) {
+    public static String join(final LinkedList source) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < source.size(); ++i) {
             if (result.length() > 0) {
